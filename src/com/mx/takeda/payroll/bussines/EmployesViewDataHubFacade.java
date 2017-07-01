@@ -18,7 +18,7 @@ import com.mx.takeda.payroll.entity.ViewDataHub;
 @Stateless
 @LocalBean
 public class EmployesViewDataHubFacade implements EmployesViewDataHubFacadeLocal {
-	@PersistenceContext(unitName = "payroll")
+//	@PersistenceContext(unitName = "payroll")
 	private EntityManager em;
 	private static final Logger LOG = Logger.getLogger(EmployesViewDataHubFacade.class.getName());
 
@@ -27,17 +27,17 @@ public class EmployesViewDataHubFacade implements EmployesViewDataHubFacadeLocal
 	}
 
 	@Override
-	public ViewDataHub[] getListDataHub() {
+	public List<ViewDataHub> getListDataHub() {
 		ViewDataHub[] auctionList = null;
-        try {
-            TypedQuery<ViewDataHub> auctionQuery = em.createNamedQuery("Auction.findAll", ViewDataHub.class);
-            List<ViewDataHub> auctions = auctionQuery.getResultList();
+        try { 
+            TypedQuery<Object> auctionQuery = null;//em.createNamedQuery("SELECT T.* FROM Vw_Mx_Hris_Employee T ORDER BY TO_DATE(T.LAST_UPDATE_ENTRY_DT) DESC", Object.class);
+            List<Object> auctions = auctionQuery.getResultList();
             auctionList = auctions.toArray(new ViewDataHub[0]);
         } catch (Exception e) {
             LOG.log(Level.SEVERE, e.getMessage());
         }
 
-        return buildAuctionListView(auctionList);
+        return null;
 	}
 	private ViewDataHub[] buildAuctionListView(ViewDataHub[] viewDataHubList) {
 		ViewDataHub[] viewDataHub= null; 
