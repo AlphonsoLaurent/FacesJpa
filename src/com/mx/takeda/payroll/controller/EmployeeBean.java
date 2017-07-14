@@ -7,7 +7,7 @@ import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.mx.takeda.payroll.bussines.EmployesViewDataHubFacadeLocal;
+import com.mx.takeda.payroll.bussines.EmployesViewDataHubFacade;
 import com.mx.takeda.payroll.entity.ViewDataHub;
 @Named(value="empleadosBean")
 @SessionScoped
@@ -21,9 +21,9 @@ public class EmployeeBean implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	@Inject
-	private EmployesViewDataHubFacadeLocal empleadoViewDHF;
+	private EmployesViewDataHubFacade empleadoViewDHF;
 	
 	public List<ViewDataHub> getListEmployee(){
-		return null;//empleadoViewDHF.getListDataHub();
+		return empleadoViewDHF.getListDataHub();
 	}
 }

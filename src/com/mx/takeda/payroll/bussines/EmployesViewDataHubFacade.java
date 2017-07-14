@@ -17,8 +17,8 @@ import com.mx.takeda.payroll.entity.ViewDataHub;
  */
 @Stateless
 @LocalBean
-public class EmployesViewDataHubFacade implements EmployesViewDataHubFacadeLocal {
-//	@PersistenceContext(unitName = "payroll")
+public class EmployesViewDataHubFacade {
+	@PersistenceContext(unitName = "datahub")
 	private EntityManager em;
 	private static final Logger LOG = Logger.getLogger(EmployesViewDataHubFacade.class.getName());
 
@@ -26,7 +26,7 @@ public class EmployesViewDataHubFacade implements EmployesViewDataHubFacadeLocal
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+ 
 	public List<ViewDataHub> getListDataHub() {
 		ViewDataHub[] auctionList = null;
         try { 
