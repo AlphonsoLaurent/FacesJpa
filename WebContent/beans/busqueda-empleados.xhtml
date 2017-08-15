@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>PAYROLL</title>
+<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+</h:head>
+ <h:body>
+<!-- <h1>PROCESOS DE PAYROLL </h1> -->
+	<p:inputText id="numeroEmpleado" value="#{findEmployee.idEmployee}"/>
+	<p:commandButton value="Empleado" id="findEmp" update="tblemployeeHistory" actionListener="#{findEmployee.buttonAction}" styleClass="ui-priority-primary" icon="fa fa-fw fa-search"/>
+    <p:growl id="msgs" showDetail="true"/>
+ 
+    <p:dataTable var="employ" value="#{findEmployee.listEmployee}" paginator="true" rows="7" widgetVar="listEmploy"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {Exporters}"
+                 selectionMode="single" selection="#{viewEmployee.selectedEmployee}" id="tblemployeeHistory" lazy="true">
+      	<f:facet name="{Exporters}">
+            <h:commandLink>
+                <p:graphicImage value="images/Excel-2-icon.png" name="images/Excel-2-icon.png" width="24"/>
+                <p:dataExporter type="xls" target="tblemployee" fileName="Historico-Empleado" />
+            </h:commandLink>
+        </f:facet>
+     
+    	<p:column headerText="ID WD" width="100px;"><h:outputText value="#{employ.employee_id}"/></p:column>
+		<p:column headerText="ID ORACLE" width="140px;"><h:outputText value="#{employ.identification_nbr}"/></p:column>
+		<p:column headerText="NOMBRE" width="250px;"><h:outputText value="#{employ.lgl_nm_lst_nm}"/>&nbsp;<h:outputText value="#{employ.lgl_nm_middle_nm}"/></p:column>
+		<p:column headerText="A. PATERNO" width="150px;"><h:outputText value="#{employ.lgl_nm_first_nm}"/></p:column>
+		<p:column headerText="A. MATERNO" width="150px;"><h:outputText value="#{employ.lgl_nm_2ndry_lst_nm}"/></p:column>
+		<p:column headerText="TITULO" width="90px;"><h:outputText value="#{employ.lgl_nm_title}"/></p:column>
+		<p:column headerText="GENERO" width="90px;"><h:outputText value="#{employ.gender}"/></p:column>
+		<p:column headerText="F. NACIMIENTO" width="150px;"><h:outputText value="#{employ.dt_of_birth}"/></p:column>
+		<p:column headerText="C. NACIMIENTO" width="350px;"><h:outputText value="#{employ.city_of_birth}"/></p:column>
+		<p:column headerText="PAIS REGION" width="180px;"><h:outputText value="#{employ.country_region_nm}"/></p:column>
+		<p:column headerText="PAIS" width="100px;"><h:outputText value="#{employ.country}"/></p:column>
+		<p:column headerText="EDO CIVIL" width="130px;"><h:outputText value="#{employ.marital_status}"/></p:column>
+		<p:column headerText="NACIONALIDAD" width="150px;"><h:outputText value="#{employ.nationality}"/></p:column>
+		<p:column headerText="BAJA" width="150px;"><h:outputText value="#{employ.hire_dt}"/></p:column>
+		<p:column headerText="CURP" width="150px;"><h:outputText value="#{employ.curp}"/></p:column>
+		<p:column headerText="RFC" width="200px;"><h:outputText value="#{employ.rfc}"/></p:column>
+		<p:column headerText="NSS" width="120px;"><h:outputText value="#{employ.ssn}"/></p:column>
+		<p:column headerText="MAIL" width="450px;"><h:outputText value="#{employ.prim_work_email}"/></p:column>
+		<p:column headerText="CAMBIO ESTATUS" width="180px;"><h:outputText value="#{employ.status_change_entry_dt_per}"/></p:column>
+		<p:column headerText="ULTIMA ACTUALIZACION" width="290px;"><h:outputText value="#{employ.last_update_entry_dt}"/></p:column>
+		<p:column headerText="FECHA DE CARGA" width="300px;"><h:outputText value="#{employ.load_dt_per}"/></p:column>
+		<p:column headerText="POSITION ID" width="250px;"><h:outputText value="#{employ.position_id}"/></p:column>
+		<p:column headerText="NOMBRE DE ORGANIZACION" width="300px;"><h:outputText value="#{employ.organization_nm}"/></p:column>
+		<p:column headerText="TIPO" width="90px;"><h:outputText value="#{employ.employee_typ}"/></p:column>
+		<p:column headerText="PLAN" width="150px;"><h:outputText value="#{employ.plan}"/></p:column>
+		<p:column headerText="LOCATION" width="200px;"><h:outputText value="#{employ.location_nm}"/></p:column>
+		<p:column headerText="PERFIL" width="500px;"><h:outputText value="#{employ.job_profile_nm}"/></p:column>
+		<p:column headerText="GRADO" width="90px;"><h:outputText value="#{employ.comp_grade_id}"/></p:column>
+		<p:column headerText="CATEGORIA" width="130px;"><h:outputText value="#{employ.employee_category}"/></p:column>
+		<p:column headerText="SALARIO BASE" width="190px;"><h:outputText value="#{employ.salary_basis}"/></p:column>
+		<p:column headerText="FECHA EFECTIVA" width="200px;"><h:outputText value="#{employ.eff_from_dt_asg}"/></p:column>
+		<p:column headerText="SUPERVISOR" width="150px;"><h:outputText value="#{employ.supervisor_id}"/></p:column>
+		<p:column headerText="CC" width="350px;"><h:outputText value="#{employ.cost_center_org_cd}"/></p:column>
+		<p:column headerText="FECHA CARGA" width="200px;"><h:outputText value="#{employ.load_dt_asg}"/></p:column>
+		<p:column headerText="DIRECCION" width="350px;"><h:outputText value="#{employ.prim_home_addr_line_1}"/></p:column>
+		<p:column headerText="CIUDAD" width="350px;"><h:outputText value="#{employ.prim_home_city_subdivision_1}"/></p:column>
+		<p:column headerText="REGION SUBDIVISION" width="400px;"><h:outputText value="#{employ.prim_home_region_subdivision_1}"/></p:column>
+		<p:column headerText="CP" width="100px;"><h:outputText value="#{employ.prim_home_postal_cd}"/></p:column>
+		<p:column headerText="CIUDAD" width="450px;"><h:outputText value="#{employ.prim_home_city}"/></p:column>
+		<p:column headerText="REGION" width="300px;"><h:outputText value="#{employ.prim_home_region}"/></p:column>
+		<p:column headerText="PAIS" width="150px;"><h:outputText value="#{employ.prim_home_country_alpha_2_cd}"/></p:column>
+		<p:column headerText="FECHA EFECTIVA" width="200px;"><h:outputText value="#{employ.eff_from_dt_adr}"/></p:column>
+		<p:column headerText="FECHA DE CARGA" width="200px;"><h:outputText value="#{employ.load_dt_addr}"/></p:column>
+		<p:column headerText="SALARIO BASE" width="250px;"><h:outputText value="#{employ.base_sal_effdt}"/></p:column>
+		<p:column headerText="SALARIO" width="100px;"><h:outputText value="#{employ.salary}"/></p:column>
+		<p:column headerText="CAMBIO ESTATUS" width="200px;"><h:outputText value="#{employ.status_change_entry_dt_sal}"/></p:column>
+		<p:column headerText="ULTIMA ACTUALIZACION" width="290px;"><h:outputText value="#{employ.last_update_entry_dt_sal}"/></p:column>
+		<p:column headerText="FECHA DE CARGA SALARIO" width="350px;"><h:outputText value="#{employ.load_dt_sal}"/></p:column>
+		<p:column headerText="COMPAÑIA" width="400px;"><h:outputText value="#{employ.company_nm}"/></p:column>
+		<p:column headerText="PROGRAMACION HORA" width="260px;"><h:outputText value="#{employ.scheduled_wkly_hrs}"/></p:column>
+		<p:column headerText="CAMBIO DE ESTATUS" width="250px;"><h:outputText value="#{employ.status_change_entry_dt_sta}"/></p:column>
+		<p:column headerText="FECHA DE CARGA DE ESTATUS" width="350px;"><h:outputText value="#{employ.load_dt_sta}"/></p:column>
+    </p:dataTable> 
+</h:body>
+</html>

@@ -1,0 +1,25 @@
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: block;
+    max-width: 36%;
+    height: auto;
+}
+
+.navbar-custom {
+    background: #e0e0e0 !important;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none;
+    color: blue;
+    text-align: -webkit-center;
+}
+
+
+@media (min-width: 768px).navbar-custom {
+    padding: 0px 40px 20px 0px;
+    -webkit-transition: padding .3s;
+    -moz-transition: padding .3s;
+    transition: padding .3s;
+}
+
+ 

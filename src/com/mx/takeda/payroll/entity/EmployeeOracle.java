@@ -10,18 +10,16 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.eclipse.persistence.annotations.ReadOnly;
-
 @ReadOnly
 @Entity
-@Table(name = "Vw_Mx_Hris_Employee")
+@Table(name = "APPS.VW_MX_EMPLOYEE_TBL")
 @NamedQueries({
-    @NamedQuery(name = "ViewDataHub.findAll", query = "SELECT T FROM ViewDataHub T where T.last_update_entry_dt =:condition ORDER BY T.last_update_entry_dt DESC"),
-    @NamedQuery(name = "ViewDataHub.findEmployeeByIdOracle", query = "SELECT T FROM ViewDataHub T where T.employee_id =:condition ORDER BY T.last_update_entry_dt DESC"),
-    @NamedQuery(name = "ViewDataHub.findEmployeeByIdWD", query = "SELECT T FROM ViewDataHub T where T.identification_nbr =:condition ORDER BY T.last_update_entry_dt DESC")
+    @NamedQuery(name = "EmpOracle.findAll", query = "SELECT T FROM EmployeeOracle T where T.employee_id =:condition ORDER BY T.last_update_entry_dt DESC"),
+    @NamedQuery(name = "EmpOracle.findByIdOracle", query = "SELECT T FROM EmployeeOracle T where T.employee_id =:condition ORDER BY T.last_update_entry_dt DESC"),
+    @NamedQuery(name = "EmpOracle.findByIdWD", query = "SELECT T FROM EmployeeOracle T where T.identification_nbr =:condition ORDER BY T.last_update_entry_dt DESC")
 })
-public class ViewDataHub implements Serializable{
- 
-	private static final long serialVersionUID = 6370415491822362402L;
+public class EmployeeOracle implements Serializable {
+	private static final long serialVersionUID = -6017524796761597612L;
 	@Id
 	@Column(name = "EMPLOYEE_ID")
 	private String employee_id;
@@ -42,22 +40,18 @@ public class ViewDataHub implements Serializable{
 	private String rfc;
 	private String ssn;
 	private String prim_work_email;
-	private String status_change_entry_dt_per;
+	private String status_change_entry_dt;
 	private String last_update_entry_dt;
-	private String load_dt_per;
 	private String position_id;
 	private String organization_nm;
 	private String employee_typ;
-	private String plan;
 	private String location_nm;
 	private String job_profile_nm;
 	private String comp_grade_id;
 	private String employee_category;
-	private String salary_basis;
+	private String base_sal_frequency;
 	private String eff_from_dt_asg;
 	private String supervisor_id;
-	private String cost_center_org_cd;
-	private String load_dt_asg;
 	private String prim_home_addr_line_1;
 	private String prim_home_city_subdivision_1;
 	private String prim_home_region_subdivision_1;
@@ -66,16 +60,30 @@ public class ViewDataHub implements Serializable{
 	private String prim_home_region;
 	private String prim_home_country_alpha_2_cd;
 	private String eff_from_dt_adr;
-	private String load_dt_addr;
 	private String base_sal_effdt;
-	private String salary;
-	private String status_change_entry_dt_sal;
+	private String base_sal_amount;
 	private String last_update_entry_dt_sal;
-	private String load_dt_sal;
 	private String company_nm;
 	private String scheduled_wkly_hrs;
 	private String status_change_entry_dt_sta;
-	private String load_dt_sta;
+	private String term_dt;
+	private String last_work_dt;
+	private String action_reason;
+	private String lcl_term_rsn_id;
+	private String status_change_entry_dt_ter;
+	private String vm_log;
+	private String status;
+	private String created_by;
+	private String last_update_date;
+	private String last_updated_by;
+	private String last_update_login;
+	private String create_date;
+	private String person_id;
+	private String assignment_id;
+	private String cost_center_org;
+	private String comp_table_group;
+	private String attribute10;
+	private String request_id;
 	private String lgl_nm_middle_nm;
 	public String getEmployee_id() {
 		return employee_id;
@@ -185,23 +193,17 @@ public class ViewDataHub implements Serializable{
 	public void setPrim_work_email(String prim_work_email) {
 		this.prim_work_email = prim_work_email;
 	}
-	public String getStatus_change_entry_dt_per() {
-		return status_change_entry_dt_per;
+	public String getStatus_change_entry_dt() {
+		return status_change_entry_dt;
 	}
-	public void setStatus_change_entry_dt_per(String status_change_entry_dt_per) {
-		this.status_change_entry_dt_per = status_change_entry_dt_per;
+	public void setStatus_change_entry_dt(String status_change_entry_dt) {
+		this.status_change_entry_dt = status_change_entry_dt;
 	}
 	public String getLast_update_entry_dt() {
 		return last_update_entry_dt;
 	}
 	public void setLast_update_entry_dt(String last_update_entry_dt) {
 		this.last_update_entry_dt = last_update_entry_dt;
-	}
-	public String getLoad_dt_per() {
-		return load_dt_per;
-	}
-	public void setLoad_dt_per(String load_dt_per) {
-		this.load_dt_per = load_dt_per;
 	}
 	public String getPosition_id() {
 		return position_id;
@@ -220,12 +222,6 @@ public class ViewDataHub implements Serializable{
 	}
 	public void setEmployee_typ(String employee_typ) {
 		this.employee_typ = employee_typ;
-	}
-	public String getPlan() {
-		return plan;
-	}
-	public void setPlan(String plan) {
-		this.plan = plan;
 	}
 	public String getLocation_nm() {
 		return location_nm;
@@ -251,11 +247,11 @@ public class ViewDataHub implements Serializable{
 	public void setEmployee_category(String employee_category) {
 		this.employee_category = employee_category;
 	}
-	public String getSalary_basis() {
-		return salary_basis;
+	public String getBase_sal_frequency() {
+		return base_sal_frequency;
 	}
-	public void setSalary_basis(String salary_basis) {
-		this.salary_basis = salary_basis;
+	public void setBase_sal_frequency(String base_sal_frequency) {
+		this.base_sal_frequency = base_sal_frequency;
 	}
 	public String getEff_from_dt_asg() {
 		return eff_from_dt_asg;
@@ -268,18 +264,6 @@ public class ViewDataHub implements Serializable{
 	}
 	public void setSupervisor_id(String supervisor_id) {
 		this.supervisor_id = supervisor_id;
-	}
-	public String getCost_center_org_cd() {
-		return cost_center_org_cd;
-	}
-	public void setCost_center_org_cd(String cost_center_org_cd) {
-		this.cost_center_org_cd = cost_center_org_cd;
-	}
-	public String getLoad_dt_asg() {
-		return load_dt_asg;
-	}
-	public void setLoad_dt_asg(String load_dt_asg) {
-		this.load_dt_asg = load_dt_asg;
 	}
 	public String getPrim_home_addr_line_1() {
 		return prim_home_addr_line_1;
@@ -329,41 +313,23 @@ public class ViewDataHub implements Serializable{
 	public void setEff_from_dt_adr(String eff_from_dt_adr) {
 		this.eff_from_dt_adr = eff_from_dt_adr;
 	}
-	public String getLoad_dt_addr() {
-		return load_dt_addr;
-	}
-	public void setLoad_dt_addr(String load_dt_addr) {
-		this.load_dt_addr = load_dt_addr;
-	}
 	public String getBase_sal_effdt() {
 		return base_sal_effdt;
 	}
 	public void setBase_sal_effdt(String base_sal_effdt) {
 		this.base_sal_effdt = base_sal_effdt;
 	}
-	public String getSalary() {
-		return salary;
+	public String getBase_sal_amount() {
+		return base_sal_amount;
 	}
-	public void setSalary(String salary) {
-		this.salary = salary;
-	}
-	public String getStatus_change_entry_dt_sal() {
-		return status_change_entry_dt_sal;
-	}
-	public void setStatus_change_entry_dt_sal(String status_change_entry_dt_sal) {
-		this.status_change_entry_dt_sal = status_change_entry_dt_sal;
+	public void setBase_sal_amount(String base_sal_amount) {
+		this.base_sal_amount = base_sal_amount;
 	}
 	public String getLast_update_entry_dt_sal() {
 		return last_update_entry_dt_sal;
 	}
 	public void setLast_update_entry_dt_sal(String last_update_entry_dt_sal) {
 		this.last_update_entry_dt_sal = last_update_entry_dt_sal;
-	}
-	public String getLoad_dt_sal() {
-		return load_dt_sal;
-	}
-	public void setLoad_dt_sal(String load_dt_sal) {
-		this.load_dt_sal = load_dt_sal;
 	}
 	public String getCompany_nm() {
 		return company_nm;
@@ -383,16 +349,119 @@ public class ViewDataHub implements Serializable{
 	public void setStatus_change_entry_dt_sta(String status_change_entry_dt_sta) {
 		this.status_change_entry_dt_sta = status_change_entry_dt_sta;
 	}
-	public String getLoad_dt_sta() {
-		return load_dt_sta;
+	public String getTerm_dt() {
+		return term_dt;
 	}
-	public void setLoad_dt_sta(String load_dt_sta) {
-		this.load_dt_sta = load_dt_sta;
+	public void setTerm_dt(String term_dt) {
+		this.term_dt = term_dt;
+	}
+	public String getLast_work_dt() {
+		return last_work_dt;
+	}
+	public void setLast_work_dt(String last_work_dt) {
+		this.last_work_dt = last_work_dt;
+	}
+	public String getAction_reason() {
+		return action_reason;
+	}
+	public void setAction_reason(String action_reason) {
+		this.action_reason = action_reason;
+	}
+	public String getLcl_term_rsn_id() {
+		return lcl_term_rsn_id;
+	}
+	public void setLcl_term_rsn_id(String lcl_term_rsn_id) {
+		this.lcl_term_rsn_id = lcl_term_rsn_id;
+	}
+	public String getStatus_change_entry_dt_ter() {
+		return status_change_entry_dt_ter;
+	}
+	public void setStatus_change_entry_dt_ter(String status_change_entry_dt_ter) {
+		this.status_change_entry_dt_ter = status_change_entry_dt_ter;
+	}
+	public String getVm_log() {
+		return vm_log;
+	}
+	public void setVm_log(String vm_log) {
+		this.vm_log = vm_log;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getCreated_by() {
+		return created_by;
+	}
+	public void setCreated_by(String created_by) {
+		this.created_by = created_by;
+	}
+	public String getLast_update_date() {
+		return last_update_date;
+	}
+	public void setLast_update_date(String last_update_date) {
+		this.last_update_date = last_update_date;
+	}
+	public String getLast_updated_by() {
+		return last_updated_by;
+	}
+	public void setLast_updated_by(String last_updated_by) {
+		this.last_updated_by = last_updated_by;
+	}
+	public String getLast_update_login() {
+		return last_update_login;
+	}
+	public void setLast_update_login(String last_update_login) {
+		this.last_update_login = last_update_login;
+	}
+	public String getCreate_date() {
+		return create_date;
+	}
+	public void setCreate_date(String create_date) {
+		this.create_date = create_date;
+	}
+	public String getPerson_id() {
+		return person_id;
+	}
+	public void setPerson_id(String person_id) {
+		this.person_id = person_id;
+	}
+	public String getAssignment_id() {
+		return assignment_id;
+	}
+	public void setAssignment_id(String assignment_id) {
+		this.assignment_id = assignment_id;
+	}
+	public String getCost_center_org() {
+		return cost_center_org;
+	}
+	public void setCost_center_org(String cost_center_org) {
+		this.cost_center_org = cost_center_org;
+	}
+	public String getComp_table_group() {
+		return comp_table_group;
+	}
+	public void setComp_table_group(String comp_table_group) {
+		this.comp_table_group = comp_table_group;
+	}
+	public String getAttribute10() {
+		return attribute10;
+	}
+	public void setAttribute10(String attribute10) {
+		this.attribute10 = attribute10;
+	}
+	public String getRequest_id() {
+		return request_id;
+	}
+	public void setRequest_id(String request_id) {
+		this.request_id = request_id;
 	}
 	public String getLgl_nm_middle_nm() {
 		return lgl_nm_middle_nm;
 	}
 	public void setLgl_nm_middle_nm(String lgl_nm_middle_nm) {
 		this.lgl_nm_middle_nm = lgl_nm_middle_nm;
-	} 
+	}
+	
 }
