@@ -8,7 +8,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 import com.mx.takeda.payroll.entity.ViewDataHub;
 import com.mx.takeda.payroll.utils.Constante;
@@ -30,9 +30,8 @@ public class EmployesViewDataHubDao {
         	}
         	if("14/08/2017".equals(fecha)){        		
         		fecha = "08/08/2017";
-        	}
-            TypedQuery<ViewDataHub> searchQuery = em.createNamedQuery("ViewDataHub.findAll", ViewDataHub.class);
-            searchQuery.setParameter("condition", fecha);
+        	} 
+            Query searchQuery = em.createNativeQuery("SELECT T.* FROM Vw_Mx_Hris_Employee T where T.LAST_UPDATE_ENTRY_DT ='"+fecha+"' ORDER BY TO_DATE(T.LAST_UPDATE_ENTRY_DT) DESC", ViewDataHub.class);
             listEmpleados = searchQuery.getResultList();
             
             System.out.println("Total de empleados.... "+listEmpleados.size());

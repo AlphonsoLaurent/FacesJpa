@@ -8,7 +8,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 import com.mx.takeda.payroll.entity.EmployeeOracle;
 @Stateless
@@ -18,13 +18,11 @@ public class EmployeeOracleDao {
 	private EntityManager em;
 	private static final Logger LOG = Logger.getLogger(EmployeeOracleDao.class.getName()); 
 	public List<EmployeeOracle> findEmployeeById(String idEmployee) {
+		System.out.println(":::::::::::::::::::::::::::HISTORY CONSULTING OF EMPLOYEE:::::::::::::::::::::::::::::");
 		List<EmployeeOracle> listEmpleados = null;
-        try { 
-        	
-            TypedQuery<EmployeeOracle> searchQuery = em.createNamedQuery("EmpOracle.findByIdOracle", EmployeeOracle.class);
-            searchQuery.setParameter("condition", idEmployee);
-            listEmpleados = searchQuery.getResultList();
-            
+        try {  
+            Query query = em.createNativeQuery( "SELECT * FROM VW_MX_EMPLOYEE_TBL WHERE (EMPLOYEE_ID = "+idEmployee+") ORDER BY LAST_UPDATE_ENTRY_DT DESC", EmployeeOracle.class);
+            listEmpleados = query.getResultList();
             System.out.println("Empleados Oracle EBS.... "+listEmpleados.size());
             
         } catch (Exception e) {

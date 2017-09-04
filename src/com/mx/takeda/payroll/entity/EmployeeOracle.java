@@ -1,6 +1,7 @@
 package com.mx.takeda.payroll.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,15 +13,15 @@ import javax.persistence.Table;
 import org.eclipse.persistence.annotations.ReadOnly;
 @ReadOnly
 @Entity
-@Table(name = "APPS.VW_MX_EMPLOYEE_TBL")
+@Table(name = "VW_MX_EMPLOYEE_TBL")
 @NamedQueries({
-    @NamedQuery(name = "EmpOracle.findAll", query = "SELECT T FROM EmployeeOracle T where T.employee_id =:condition ORDER BY T.last_update_entry_dt DESC"),
-    @NamedQuery(name = "EmpOracle.findByIdOracle", query = "SELECT T FROM EmployeeOracle T where T.employee_id =:condition ORDER BY T.last_update_entry_dt DESC"),
-    @NamedQuery(name = "EmpOracle.findByIdWD", query = "SELECT T FROM EmployeeOracle T where T.identification_nbr =:condition ORDER BY T.last_update_entry_dt DESC")
+    @NamedQuery(name = "EmpOracle.findAll", query = "SELECT E FROM EmployeeOracle E where E.employee_id =:condition ORDER BY E.last_update_entry_dt DESC"),
+    @NamedQuery(name = "EmpOracle.findByIdOracle", query = "SELECT E FROM EmployeeOracle E  ORDER BY E.last_update_entry_dt DESC"),
+    @NamedQuery(name = "EmpOracle.findByIdWD", query = "SELECT E FROM EmployeeOracle E where E.identification_nbr =:condition ORDER BY E.last_update_entry_dt DESC")
 })
 public class EmployeeOracle implements Serializable {
 	private static final long serialVersionUID = -6017524796761597612L;
-	
+//	where T.employee_id =:condition
 	@Id
 	@Column(name = "EMPLOYEE_ID") private String employee_id;
 	@Column(name = "IDENTIFICATION_NBR") private String identification_nbr;
@@ -61,10 +62,10 @@ public class EmployeeOracle implements Serializable {
 	@Column(name = "PRIM_HOME_COUNTRY_ALPHA_2_CD") private String prim_home_country_alpha_2_cd;
 	@Column(name = "EFF_FROM_DT_ADR") private String eff_from_dt_adr;
 	@Column(name = "BASE_SAL_EFFDT") private String base_sal_effdt;
-	@Column(name = "BASE_SAL_AMOUNT") private String base_sal_amount;
+	@Column(name = "BASE_SAL_AMOUNT") private Double base_sal_amount;
 	@Column(name = "LAST_UPDATE_ENTRY_DT_SAL") private String last_update_entry_dt_sal;
 	@Column(name = "COMPANY_NM") private String company_nm;
-	@Column(name = "SCHEDULED_WKLY_HRS") private String scheduled_wkly_hrs;
+	@Column(name = "SCHEDULED_WKLY_HRS") private Integer scheduled_wkly_hrs;
 	@Column(name = "STATUS_CHANGE_ENTRY_DT_STA") private String status_change_entry_dt_sta;
 	@Column(name = "TERM_DT") private String term_dt;
 	@Column(name = "LAST_WORK_DT") private String last_work_dt;
@@ -73,19 +74,18 @@ public class EmployeeOracle implements Serializable {
 	@Column(name = "STATUS_CHANGE_ENTRY_DT_TER") private String status_change_entry_dt_ter;
 	@Column(name = "VM_LOG") private String vm_log;
 	@Column(name = "STATUS") private String status;
-	@Column(name = "CREATED_BY") private String created_by;
-	@Column(name = "LAST_UPDATE_DATE") private String last_update_date;
-	@Column(name = "LAST_UPDATED_BY") private String last_updated_by;
-	@Column(name = "LAST_UPDATE_LOGIN") private String last_update_login;
-	@Column(name = "CREATE_DATE") private String create_date;
-	@Column(name = "PERSON_ID") private String person_id;
-	@Column(name = "ASSIGNMENT_ID") private String assignment_id;
+	@Column(name = "CREATED_BY") private Integer created_by;
+	@Column(name = "LAST_UPDATE_DATE") private Date last_update_date;
+	@Column(name = "LAST_UPDATED_BY") private Integer last_updated_by;
+	@Column(name = "LAST_UPDATE_LOGIN") private Integer last_update_login;
+	@Column(name = "CREATE_DATE") private Date create_date;
+	@Column(name = "PERSON_ID") private Integer person_id;
+	@Column(name = "ASSIGNMENT_ID") private Integer assignment_id;
 	@Column(name = "COST_CENTER_ORG") private String cost_center_org;
 	@Column(name = "COMP_TABLE_GROUP") private String comp_table_group;
 	@Column(name = "ATTRIBUTE10") private String attribute10;
-	@Column(name = "REQUEST_ID") private String request_id;
+	@Column(name = "REQUEST_ID") private Integer request_id;
 	@Column(name = "LGL_NM_MIDDLE_NM") private String lgl_nm_middle_nm;
-
 	public String getEmployee_id() {
 		return employee_id;
 	}
@@ -320,10 +320,10 @@ public class EmployeeOracle implements Serializable {
 	public void setBase_sal_effdt(String base_sal_effdt) {
 		this.base_sal_effdt = base_sal_effdt;
 	}
-	public String getBase_sal_amount() {
+	public Double getBase_sal_amount() {
 		return base_sal_amount;
 	}
-	public void setBase_sal_amount(String base_sal_amount) {
+	public void setBase_sal_amount(Double base_sal_amount) {
 		this.base_sal_amount = base_sal_amount;
 	}
 	public String getLast_update_entry_dt_sal() {
@@ -338,10 +338,10 @@ public class EmployeeOracle implements Serializable {
 	public void setCompany_nm(String company_nm) {
 		this.company_nm = company_nm;
 	}
-	public String getScheduled_wkly_hrs() {
+	public Integer getScheduled_wkly_hrs() {
 		return scheduled_wkly_hrs;
 	}
-	public void setScheduled_wkly_hrs(String scheduled_wkly_hrs) {
+	public void setScheduled_wkly_hrs(Integer scheduled_wkly_hrs) {
 		this.scheduled_wkly_hrs = scheduled_wkly_hrs;
 	}
 	public String getStatus_change_entry_dt_sta() {
@@ -392,46 +392,46 @@ public class EmployeeOracle implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getCreated_by() {
+	public Integer getCreated_by() {
 		return created_by;
 	}
-	public void setCreated_by(String created_by) {
+	public void setCreated_by(Integer created_by) {
 		this.created_by = created_by;
 	}
-	public String getLast_update_date() {
+	public Date getLast_update_date() {
 		return last_update_date;
 	}
-	public void setLast_update_date(String last_update_date) {
+	public void setLast_update_date(Date last_update_date) {
 		this.last_update_date = last_update_date;
 	}
-	public String getLast_updated_by() {
+	public Integer getLast_updated_by() {
 		return last_updated_by;
 	}
-	public void setLast_updated_by(String last_updated_by) {
+	public void setLast_updated_by(Integer last_updated_by) {
 		this.last_updated_by = last_updated_by;
 	}
-	public String getLast_update_login() {
+	public Integer getLast_update_login() {
 		return last_update_login;
 	}
-	public void setLast_update_login(String last_update_login) {
+	public void setLast_update_login(Integer last_update_login) {
 		this.last_update_login = last_update_login;
 	}
-	public String getCreate_date() {
+	public Date getCreate_date() {
 		return create_date;
 	}
-	public void setCreate_date(String create_date) {
+	public void setCreate_date(Date create_date) {
 		this.create_date = create_date;
 	}
-	public String getPerson_id() {
+	public Integer getPerson_id() {
 		return person_id;
 	}
-	public void setPerson_id(String person_id) {
+	public void setPerson_id(Integer person_id) {
 		this.person_id = person_id;
 	}
-	public String getAssignment_id() {
+	public Integer getAssignment_id() {
 		return assignment_id;
 	}
-	public void setAssignment_id(String assignment_id) {
+	public void setAssignment_id(Integer assignment_id) {
 		this.assignment_id = assignment_id;
 	}
 	public String getCost_center_org() {
@@ -452,10 +452,10 @@ public class EmployeeOracle implements Serializable {
 	public void setAttribute10(String attribute10) {
 		this.attribute10 = attribute10;
 	}
-	public String getRequest_id() {
+	public Integer getRequest_id() {
 		return request_id;
 	}
-	public void setRequest_id(String request_id) {
+	public void setRequest_id(Integer request_id) {
 		this.request_id = request_id;
 	}
 	public String getLgl_nm_middle_nm() {
@@ -463,6 +463,5 @@ public class EmployeeOracle implements Serializable {
 	}
 	public void setLgl_nm_middle_nm(String lgl_nm_middle_nm) {
 		this.lgl_nm_middle_nm = lgl_nm_middle_nm;
-	}
-	
+	} 
 }

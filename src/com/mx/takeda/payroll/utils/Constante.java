@@ -12,16 +12,15 @@ public class Constante {
     	//Aquí obtienes el formato que deseas
 		String fecha;
 		String dia = "";
-    	System.out.println(new SimpleDateFormat("dd/MM/yyyy").format(myDate)); 
     	fecha = new SimpleDateFormat("dd/MM/yyyy").format(myDate);
     	if(Integer.parseInt(fecha.split("/")[0]) < 10){
     		dia = "0"+(Integer.parseInt(fecha.split("/")[0])-numeroRestar);
-    		fecha = dia+"/"+fecha.split("/")[1]+"/"+fecha.split("/")[2];
+    	}else{
+    		dia = (Integer.parseInt(fecha.split("/")[0])-numeroRestar)+"";
     	}
-//    	else{
-//    		dia = (Integer.parseInt(fecha.split("/")[0])-numeroRestar)+"";
-//    	}
-    	System.out.println(fecha);
+    	fecha = dia+"/"+fecha.split("/")[1]+"/"+fecha.split("/")[2];
+    	
+     	System.out.println(fecha);
 		return fecha;
 	}
 	

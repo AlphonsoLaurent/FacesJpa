@@ -13,10 +13,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 
-import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.LazyDataModel;
 
@@ -27,7 +26,7 @@ import com.mx.takeda.payroll.entity.ViewDataHub;
 import com.mx.takeda.payroll.model.LazyEmployeeDhDataModel;
 
 @ManagedBean(name = "viewEmployee")
-@ViewScoped
+@RequestScoped
 public class EmployeeBean implements Serializable {
 
 	private static final long serialVersionUID = -7345888967680726234L;
